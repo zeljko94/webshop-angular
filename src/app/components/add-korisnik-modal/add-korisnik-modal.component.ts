@@ -25,7 +25,7 @@ export class AddKorisnikModalComponent implements OnInit {
     this.mode = '';
   }
 
-  onSave(u) {
+  onSave() {
     if(this.mode == 'add') {
       this.usersRestService.insert(this.user)
         .subscribe(data => {
