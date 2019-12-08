@@ -1,3 +1,4 @@
+import { SwalService } from 'src/app/services/swal.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ArtikliRestService } from './../../services/rest/artikli-rest.service';
 import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
@@ -11,13 +12,15 @@ export class IndexComponent implements OnInit, AfterViewInit {
   products: any[] = [];
 
   constructor(private elementRef:ElementRef, private artikliRestService: ArtikliRestService,
-    public auth: AuthService
+    public auth: AuthService, private swal: SwalService
     ) {};
 
   ngOnInit() {
+    this.swal.showLoading("Učitavanje...", false);
     this.artikliRestService.getAll()
       .subscribe(data => {
         this.products = data;
+        this.swal.hideLoading();
       });
   }
 
